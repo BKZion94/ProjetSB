@@ -20,6 +20,9 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.company.core.controller.views.ItemsViews;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import lombok.Data;
 
 @Data
@@ -29,9 +32,11 @@ import lombok.Data;
 public class Item {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
+	@JsonView(ItemsViews.Detail.class)
 	private Long id;
 	
 	@Temporal(TemporalType.DATE)
+	@JsonView(ItemsViews.Detail.class)
 	private Date integration;
 	
 	

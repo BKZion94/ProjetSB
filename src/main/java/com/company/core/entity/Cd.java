@@ -17,7 +17,7 @@ import lombok.Data;
 @Table
 
 public class Cd extends Item{
-
+	
 	@NotNull
 	private String title;
 	
