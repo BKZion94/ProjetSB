@@ -1,6 +1,7 @@
 package com.company.core.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -25,21 +26,15 @@ public class BorrowService {
 	UserRepository userRepository;
 	
 	
-	public String MakeABorrow(Long id,List<Item>items)  {
+	public String MakeABorrow(User borrower,List<Item>items)  {
 		
-		// Un User veut effectuer un emprunt 
-		User user=new User();
-		//user=userRepository.findById(id);
+
+		List<Borrow> emprunt=borrowRepository.findByBorrower(borrower);
 		
-		//Trouver combien il a d'emprunt 
-		List<Borrow> emprunt;
-		emprunt=borrowRepository.findByBorrower(user);
-		
-		//Condition du nombre d'emprunt 
 		int a=items.size();
 		int b=emprunt.size();
 		
-
+		
 		
 	return null;
 	}
