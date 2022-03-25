@@ -34,31 +34,36 @@ public class BorrowService {
 	UserRepository userRepository;
 
 	public Borrow makeABorrow(User borrower, List<Item> items) throws AvailableCopieException, QuotasExceedException {
-		// verifier condition quta utilisateur
-
-		borrower = userRepository.findById(borrower.getId())
-				.orElseThrow(() -> new EntityNotFoundException("No such User"));
+		
+		// Retrouver le borrower dans la base de donnée
+		borrower = userRepository.findById(borrower.getId()).orElseThrow(() -> new EntityNotFoundException("No such User"));
+		
+		// Trouver le nombre d'item emprunté par le borrower
 		int emprunt = borrower.getBorrowedItems().size();
-
+		
+		// Vérification si l'emprunt du borrower et le nombre d'item à emprunter est inf à 3
 		if (emprunt + items.size() > 3) {
 			throw new QuotasExceedException();
 		}
 
-		// dispo des copis sinon exception
+	
 		List<Copie> copiefound = new ArrayList<>();
+		
+		// Pour chaque items à emprunter vérifier si dans la base de donnée c'est dispo
 		for (Item item : items) {
-			List<Copie> copieDispo = copieRepository.copiedispo(item);
-
+			List<Copie> copieDispo = copieRepository.copiedispo(item);  // en reference avec le @Many to One dans la page Copie
+	
 			if (copieDispo.size() == 0) {
-				throw new AvailableCopieException(); // creer une autre exception
-				// si oui creation un borrow
+				throw new AvailableCopieException(); 
+				
 			} else {
-				copiefound.add(copieDispo.get(0));
+				copiefound.add(copieDispo.get(0));	// si la copie est disponible ajout dans la liste prédéfinie auparavant copiefound [donc
+													// les emprunts qui ont été validé
 
 			}
 		}
-
-		// affiche la date de retour + indication dela reservation
+		
+		// Creation de la reservation 
 		Borrow reservation=new Borrow();
 		reservation.setCopie(copiefound);
 		reservation.setBorrower(borrower);
@@ -69,20 +74,30 @@ public class BorrowService {
 		return reservation;
 	}
 
-	public Borrow ReturnABorrow(User borrower, List<Borrow> returns){
+	
+	
+	public Borrow ReturnABorrow(User borrower, List<Borrow> borrow){
 		
-		//identification du borrower
-		borrower = userRepository.findById(borrower.getId())
-				.orElseThrow(() -> new EntityNotFoundException("No such User"));
+		//identification du borrower qui souhaite rendre ces items 
+		borrower = userRepository.findById(borrower.getId()).orElseThrow(() -> new EntityNotFoundException("No such User"));
+		
 		// l'ensemble des borrows empruntés par le borrower
-		returned = borrower.getBorrowedItems();
+		entireborrow = borrowRepository.findByBorrower(borrower);
 		
-		// pour l'ensemble des copies retournées 
-		for(Borrow borrow:borrow) {
-			List<Copie> copieReturn = copieRepository.
+		// pour l'ensemble des copies retournées ajouté à la liste d'item et le retirer de la liste borrow
+		List<Copie> copieReturned = new ArrayList<>();
+		for(Borrow borrow:borrows) {
+			
+			
+			
+		
+			
 		}
 		
-		
+		//1-Identification du borrower qui veut rendre des items dans sa liste de Borrow
+		//2-Visualisation de l'ensemble des items du borrower
+		//3-Retirer les items que le borrower veut rendre de l'ensemeble de ces emprunt
+		//4-Ajouter les items dans l'ensemble des items
 		
 		
 	return	
