@@ -43,4 +43,14 @@ public class BorrowRepositoryTest {
 		assertTrue(copies.size()==1);
 	}
 	
+	
+	@Test
+	public void testNonFindDispo() {
+		Item item=new Item();
+		item.setId(1l);
+		
+		List<Copie> copies =copieRepository.copieNondispo(item);
+		
+		assertTrue(copies.size()==1);
+	}
 }

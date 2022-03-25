@@ -2,8 +2,6 @@ package com.company.core.service;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
@@ -71,5 +69,31 @@ public class BorrowService {
 		return reservation;
 	}
 
+	public Borrow ReturnABorrow(User borrower, List<Borrow> returns){
+		
+		//identification du borrower
+		borrower = userRepository.findById(borrower.getId())
+				.orElseThrow(() -> new EntityNotFoundException("No such User"));
+		// l'ensemble des borrows empruntés par le borrower
+		returned = borrower.getBorrowedItems();
+		
+		// pour l'ensemble des copies retournées 
+		for(Borrow borrow:borrow) {
+			List<Copie> copieReturn = copieRepository.
+		}
+		
+		
+		
+		
+	return	
+	}
+	
+	
+	
+	
+	
+	
+	
+	
 }
 
