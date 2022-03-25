@@ -2,6 +2,7 @@ package com.company.core.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -30,13 +31,11 @@ public class Borrow {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
 	
-	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date startDate;
+	private LocalDateTime startDate;
 	
-	@Temporal(TemporalType.DATE)
 	@NotNull
-	private Date endDate;
+	private LocalDateTime endDate;
 	
 	
 	@ManyToOne
@@ -44,7 +43,7 @@ public class Borrow {
 	private User borrower;
 	
 	
-	@OneToMany 
+	@OneToMany (mappedBy="borrow")
 	private List<Copie> copie =new ArrayList<>();
 	
 }

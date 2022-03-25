@@ -22,5 +22,6 @@ public class Copie {
 	@ManyToOne
     protected Item item; 
 	
-
+	@ManyToOne
+	protected Borrow borrow;
 }
