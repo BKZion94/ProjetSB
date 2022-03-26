@@ -6,7 +6,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,7 +30,7 @@ import lombok.Data;
 public class Borrow {
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
@@ -43,7 +45,7 @@ public class Borrow {
 	private User borrower;
 	
 	
-	@OneToMany (mappedBy="borrow")
+	@OneToMany (mappedBy="borrow", cascade= CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
 	private List<Copie> copie =new ArrayList<>();
 	
 }

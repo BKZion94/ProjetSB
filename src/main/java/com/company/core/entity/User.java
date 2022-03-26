@@ -7,7 +7,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 
 import javax.persistence.Entity;
-
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +23,7 @@ import lombok.Data;
 
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
 	@NotNull
@@ -39,7 +39,7 @@ public class User {
 	@NotNull
 	private String firstName;
 	
-	@OneToMany(cascade= {CascadeType.ALL}, orphanRemoval=true, mappedBy = "borrower")
+	@OneToMany(fetch=FetchType.LAZY,cascade= {CascadeType.REMOVE}, orphanRemoval=true, mappedBy = "borrower")
 	private List<Borrow> borrowedItems = new ArrayList<>();
 
 	

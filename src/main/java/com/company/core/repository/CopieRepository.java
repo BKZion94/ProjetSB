@@ -17,10 +17,11 @@ public interface CopieRepository extends JpaRepository<Copie, Long> {
 	//Lister les copies liée à un item
 	public List<Copie> findByItem(Item item);
 	
-	@Query("select c from Copie c WHERE c.item = :item AND c.id NOT IN (select c2.id from Copie c2 where c2.borrow is null)")
+	@Query("select c from Copie c WHERE c.item = :item AND c.id IN (select c2.id from Copie c2 where c2.borrow is null)")
 	public List<Copie> copiedispo(Item item);
 	
-	@Query("select c from Copie c WHERE c.item = :item AND c.id NOT IN (select c2.id from Copie c2 where c2.borrow is not null)")
+	@Query("select c from Copie c WHERE c.item = :item AND c.id IN (select c2.id from Copie c2 where c2.borrow is not null)")
 	public List<Copie> copieNondispo(Item item);
 
+	
 }

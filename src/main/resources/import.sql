@@ -20,4 +20,3 @@ insert into COPIE (ITEM_ID,ID) values (3,3)
 insert into COPIE (ITEM_ID,ID) values (1,4)
 
 
-

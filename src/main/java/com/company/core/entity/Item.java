@@ -31,7 +31,7 @@ import lombok.Data;
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Item {
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@JsonView(ItemsViews.Detail.class)
 	private Long id;
 	
