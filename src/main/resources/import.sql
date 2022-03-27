@@ -4,8 +4,10 @@ insert into USER (ID, FIRST_NAME, LAST_NAME, LOGIN, PASSWORD) values (2,'Sylvie'
 insert into ITEM (ID, INTEGRATION) values (1,'1949-08-08')
 insert into ITEM (ID, INTEGRATION) values (2,'1949-08-08')
 insert into ITEM (ID, INTEGRATION) values (3,'1949-08-08')
+insert into ITEM (ID, INTEGRATION) values (4,'1949-08-08')
 
 insert into CD (ID, ARTIST, DURATION, NB_TITLE, RELEASE_DATE,TITLE) values (1,'Kanye West', 125, 20,'2003-05-05','The college Dropout');
+insert into CD (ID, ARTIST, DURATION, NB_TITLE, RELEASE_DATE,TITLE) values (4,'Jay Z', 120, 54,'2004-05-05','The Black Album');
 
 insert into DVD (ID, DIRECTOR, DURATION, RELEASE_DATE, TITLE, TYPE) values (2,'Scorcese', 145,'2005-04-04','Casino', 'DVD');
 
@@ -18,5 +20,5 @@ insert into COPIE (ITEM_ID,ID, BORROW_ID ) values (1,1,1)
 insert into COPIE (ITEM_ID,ID) values (2,2)
 insert into COPIE (ITEM_ID,ID) values (3,3)
 insert into COPIE (ITEM_ID,ID) values (1,4)
-
+insert into COPIE (ITEM_ID,ID) values (4,5)
 

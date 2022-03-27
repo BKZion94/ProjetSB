@@ -1,11 +1,11 @@
 package com.company.core.service;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class BorrowServiceTest {
 	BorrowService borrowService;
 	
 	@Test
-	public void WhenUsertestMakeABorrowCheckHeCan() throws AvailableCopieException, QuotasExceedException {
+	public void WhenUserTestMakeABorrowCheckIfHeCan() throws AvailableCopieException, QuotasExceedException {
 		
 		// Creation d'un borrower
 		User borrower = new User();
@@ -52,10 +52,17 @@ public class BorrowServiceTest {
 	}
 	
 	@Test
-	public void WhenABorrowtestIsEmpty() throws AvailableCopieException, QuotasExceedException {
+	public void CheckIfTheListOfCopiesBorrowedAreEmpty() throws AvailableCopieException, QuotasExceedException, DepassementException {
 		// Ce test indique si une copie est réelement rendu lors d'un retour d'emprunt
 		Borrow borrow = new Borrow();
 		borrow.setId(1L);
+		borrow.setEndDate(LocalDateTime.of(2022, 03, 26, 20, 20));
+		borrow.setStartDate(LocalDateTime.of(2022,03,24,1,1));
+		
+		LocalDateTime a=borrow.getStartDate();
+		LocalDateTime b=borrow.getEndDate();
+		
+		long differenceInDays = ChronoUnit.DAYS.between(a,b);
 		
 		List<Copie> copieList = new ArrayList<>();
 		Copie copie =new Copie();
@@ -69,9 +76,12 @@ public class BorrowServiceTest {
 		
 		Borrow borrow1=borrowService.returnABorrow(borrow);
 		
-		assertEquals(0,borrow1.getCopie().size()); // OK les copies liées à un borrow sont inexistants
-		
+		assertEquals(0,borrow1.getCopie().size()); 
+													// OK les copies liées à un borrow sont inexistants
+		assertThat(differenceInDays).isLessThan(8); // Non dépassement du quota de prêt
 	}
+
+	
 
 
 }

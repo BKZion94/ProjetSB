@@ -1,6 +1,7 @@
 package com.company.core.service;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,35 +37,28 @@ public class BorrowService {
 
 	public Borrow makeABorrow(User borrower, List<Item> items) throws AvailableCopieException, QuotasExceedException {
 
-		// Retrouver le borrower dans la base de donnée
 		borrower = userRepository.findById(borrower.getId()).orElseThrow(() -> new EntityNotFoundException("No such User"));
 
-		// Trouver le nombre d'item emprunté par le borrower
 		int emprunt = borrower.getBorrowedItems().size();
 
-		// Vérification si l'emprunt du borrower et le nombre d'item à emprunter est inf à 3
 		if (emprunt + items.size() > 3) {
 			throw new QuotasExceedException();
 		}
 
-
 		List<Copie> copiefound = new ArrayList<>();
 
-		// Pour chaque items à emprunter vérifier si dans la base de donnée c'est dispo
 		for (Item item : items) {
-			List<Copie> copieDispo = copieRepository.copiedispo(item);  // en reference avec le @Many to One dans la page Copie
+			List<Copie> copieDispo = copieRepository.copiedispo(item); 
 
 			if (copieDispo.size() == 0) {
 				throw new AvailableCopieException(); 
 
 			} else {
-				copiefound.add(copieDispo.get(0));	// si la copie est disponible ajout dans la liste prédéfinie auparavant copiefound [donc
-				// les emprunts qui ont été validé
+				copiefound.add(copieDispo.get(0));
 
 			}
 		}
 
-		// Creation de la reservation 
 		Borrow reservation=new Borrow();
 		reservation.setCopie(copiefound);
 		reservation.setBorrower(borrower);
@@ -77,7 +71,7 @@ public class BorrowService {
 
 
 
-	public Borrow returnABorrow(Borrow borrow) {
+	public Borrow returnABorrow(Borrow borrow) throws DepassementException{
 
 		borrow=borrowRepository.getById(borrow.getId()); 
 
@@ -91,7 +85,15 @@ public class BorrowService {
 		
 		}
 		
-		borrowRepository.save(borrow);
+		LocalDateTime startDate=borrow.getStartDate();
+		LocalDateTime endDate = borrow.getEndDate();
+		long differenceInDays = ChronoUnit.DAYS.between(startDate,endDate);
+		
+		if (differenceInDays>7) {
+			throw new DepassementException();
+		}
+		
+		
 		return borrow;
 	}
 

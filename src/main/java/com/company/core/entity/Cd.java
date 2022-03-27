@@ -23,7 +23,6 @@ public class Cd extends Item{
 	
 	@NotNull
 	@Temporal(TemporalType.DATE)
-	
 
 	private Date releaseDate;
 	
@@ -31,10 +30,14 @@ public class Cd extends Item{
 	private String artist;
 	
 	@NotNull
-	private Duration duration;
+	private int duration;
 	
 	@NotNull
 	private int nbTitle;
+
+	
+		
+	}
 	
 	
-}
+
