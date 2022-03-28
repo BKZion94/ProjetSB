@@ -12,6 +12,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.company.core.controller.ItemNotFoundException;
 import com.company.core.entity.Borrow;
 import com.company.core.entity.Copie;
 import com.company.core.entity.Item;
@@ -71,9 +72,9 @@ public class BorrowService {
 
 
 
-	public Borrow returnABorrow(Borrow borrow) throws DepassementException{
+	public Borrow returnABorrow(Borrow borrow) throws DepassementException, ItemNotFoundException{
 
-		borrow=borrowRepository.getById(borrow.getId()); 
+		borrow=borrowRepository.findById(borrow.getId()).orElseThrow(() -> new ItemNotFoundException("No such borrow")); 
 
 		List<Copie> copis = borrow.getCopie();
 

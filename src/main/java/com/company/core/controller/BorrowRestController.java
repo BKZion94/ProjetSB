@@ -52,7 +52,7 @@ public class BorrowRestController {
 	}
 
 	@DeleteMapping("/borrow/{id}")
-	public Borrow RestituteAEmprunt(@PathVariable Long id) throws DepassementException {
+	public Borrow RestituteAEmprunt(@PathVariable Long id) throws DepassementException, ItemNotFoundException {
 		Borrow borrow = new Borrow();
 		borrow.setId(id);
 		
