@@ -53,7 +53,13 @@ public class BorrowRestController {
 		return borrowService.makeABorrow(borrower, item);
 	}
 
-	
+	@PostMapping("/borrow/undo/{id}")
+	public Borrow RestituteAEmprunt(@PathVariable Long id) throws AvailableCopieException, QuotasExceedException, DepassementException {
+		Borrow borrow = new Borrow();
+		borrow.setId(id);
+		
+		return borrowService.returnABorrow(borrow);
+	}
 	
 	
 	
