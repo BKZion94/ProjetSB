@@ -45,18 +45,14 @@ public class BorrowRestController {
 		return borrowService.findAllBorrow();
 	}
 	
-	/**@PostMapping("/borrow")
-	public Borrow createAEmprunt(@RequestBody User borrower, ) throws AvailableCopieException, QuotasExceedException {
-		User user = new User();
-		user.setId(id);
+	@PostMapping("/borrow/do/{id}")
+	public Borrow createAEmprunt(@PathVariable Long id, @RequestBody List<Item> item) throws AvailableCopieException, QuotasExceedException {
+		User borrower = new User();
+		borrower.setId(id);
 		
-	
-		
-		
-		return borrowService.makeABorrow(user, item);
-	}**/
+		return borrowService.makeABorrow(borrower, item);
+	}
 
-	
 	
 	
 	

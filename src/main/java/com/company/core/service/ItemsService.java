@@ -96,12 +96,7 @@ public class ItemsService {
 		return itemRepository.save(cd);
 	}
 
-	
-	public Dvd findByDirector(String director) {
-		return itemRepository.findByDirectorContainsIgnoreCase(director).orElseThrow(() -> new EntityNotFoundException("No such Cd in the catalogue"));
-	}
-	
-	
+
 	
 	// Pour les books
 	
@@ -125,10 +120,7 @@ public class ItemsService {
 		return itemRepository.save(book);
 	}
 	
-	
-	public Book findByBook(String author) {
-		return itemRepository.findByAuthorContainsIgnoreCase(author).orElseThrow(() -> new EntityNotFoundException("No such Cd in the catalogue"));
-	}
+
 	
 	
 	

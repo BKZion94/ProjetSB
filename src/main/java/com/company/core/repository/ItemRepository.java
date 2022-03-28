@@ -15,29 +15,17 @@ import com.company.core.entity.Item;
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long>{
 	
-	
-	// CD Section
-		//**Get list all Cd by Artist 
+
 	@Query("from Cd")
 	public List<Cd> findAllCd();
-		//** Get Cd by the artist name
 
 	
-
-	
-	// DVD section
 	@Query("from Dvd")
 	public List<Dvd> findAllDvd();
-		//** Get Dvd by Director 
-	public Optional<Dvd> findByDirectorContainsIgnoreCase(String director);
 
-
-	
-	// Book section 
 	@Query("from Book")
 	public List<Book> findAllBook();
-		//** Get Book by Author
-	public Optional<Book> findByAuthorContainsIgnoreCase(String author);
+
 	
 
 
