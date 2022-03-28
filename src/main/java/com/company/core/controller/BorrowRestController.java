@@ -52,13 +52,13 @@ public class BorrowRestController {
 	}
 	
 	
-	@DeleteMapping("/borrow")
+	/**@DeleteMapping("/borrow")
 	public Borrow deleteBorrow(@PathVariable Long id) throws DepassementException {
 	
 		
 		
 		return borrowService.returnABorrow(borrow);
-	}
+	}**/
 	
 	
 	
