@@ -28,41 +28,33 @@ public class ItemRestController {
 		this.itemService=itemService;
 	}
 
-	@GetMapping
-	//@JsonView(ItemViews.List.Class)
-	public List<Item> findAllItems() throws ItemNotFoundException{
-		return itemService.getAllItems();
-	}
+//	@GetMapping
+//	//@JsonView(ItemViews.List.Class)
+//	public List<Item> findAllItems() throws ItemNotFoundException{
+//		return itemService.getAllItems();
+//	}
 
 	@GetMapping("/{id}")
 	public Item getbyItem(@PathVariable long id) throws ItemNotFoundException{
 		return itemService.getItem(id);
 	}
 
-	@GetMapping("/{type}")
-	public Object recherche(@RequestParam(required=false) String type){
-		Object o = new Object();
+	@GetMapping()
+	public List<Item> recherche(@RequestParam(required=false) String type){
+		
 
 		if(type !=null) {
 			if (type.equals("Dvd")) {
-				o=itemService.getAllDvds();
+				return itemService.getAllDvds();
 			}
 			else if (type.equals("Cd")) {
-				o=itemService.getAllCds();}
-			else if (type.equals("Book")){
-				o=itemService.getAllBooks();	
-
-			}
-		}else {
-			o=itemService.getAllItems();
+				return itemService.getAllCds();
+			} else 
+				return itemService.getAllBooks();	
+		} else {
+			return itemService.getAllItems();
 		}
 
-		return o;
 	}
 
-
-	
-	
-	
-	
 }

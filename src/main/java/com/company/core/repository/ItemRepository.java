@@ -17,14 +17,14 @@ public interface ItemRepository extends JpaRepository<Item, Long>{
 	
 
 	@Query("from Cd")
-	public List<Cd> findAllCd();
+	public List<Item> findAllCd();
 
 	
 	@Query("from Dvd")
-	public List<Dvd> findAllDvd();
+	public List<Item> findAllDvd();
 
 	@Query("from Book")
-	public List<Book> findAllBook();
+	public List<Item> findAllBook();
 
 	
 

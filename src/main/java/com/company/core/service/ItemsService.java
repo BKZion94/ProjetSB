@@ -21,10 +21,7 @@ public class ItemsService {
 	
 	// Pour tous les items
 	public List<Item> getAllItems(){
-		List<Item> items = new ArrayList<>();
-		itemRepository.findAll()
-		.forEach(items::add);
-		return items;
+		return 	itemRepository.findAll();
 	}
 
 	public void addItems(Item item) {
@@ -50,17 +47,12 @@ public class ItemsService {
 	// Pour les CDs 
 	
 
-	public List<Cd> getAllCds(){
-		List<Cd> cds = new ArrayList<>();
-		itemRepository.findAllCd()
-		.forEach(cds::add);
+	public List<Item> getAllCds(){
+
 		return itemRepository.findAllCd();
 	}
 
 	public void addCds(Cd cd) {
-		List<Cd> cds = new ArrayList<>();
-		cds = itemRepository.findAllCd();
-		cds.add(cd);
 		itemRepository.save(cd);
 	}
 
@@ -76,11 +68,9 @@ public class ItemsService {
 
 	// Pour les Dvds
 	
-	public List<Dvd> getAllDvds(){
-		List<Dvd> dvds = new ArrayList<>();
-		itemRepository.findAllDvd()
-		.forEach(dvds::add);
-		return dvds;
+	public List<Item> getAllDvds(){
+		return itemRepository.findAllDvd();
+
 	}
 
 	public Dvd addDvds(Dvd dvd) {
@@ -100,11 +90,10 @@ public class ItemsService {
 	
 	// Pour les books
 	
-	public List<Book> getAllBooks(){
-		List<Book> books = new ArrayList<>();
-		itemRepository.findAllBook()
-		.forEach(books::add);
-		return books;
+	public List<Item> getAllBooks(){
+		
+		return itemRepository.findAllBook();
+		
 	}
 
 	public Book addBooks(Book book) {
