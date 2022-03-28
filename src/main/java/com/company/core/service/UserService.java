@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.hibernate.LazyInitializationException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,9 @@ public class UserService {
 	UserRepository userRepository;
 	
 	// Lecture de la liste des Users
-
+	public List<User> findAllUsers() throws LazyInitializationException{
+		return userRepository.findAll();
+	}
 	
 	// Creation d'un User
 	public void addUsers(User user) {
