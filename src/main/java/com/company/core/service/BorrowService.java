@@ -97,6 +97,14 @@ public class BorrowService {
 		return borrow;
 	}
 
+	
+	// Visualiser les emprunts
+	
+	public List<Borrow> findAllBorrow(){
+		return borrowRepository.findAll();
+	}
+	
+	//
 
 }
 

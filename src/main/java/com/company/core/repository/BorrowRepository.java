@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
 import com.company.core.entity.Borrow;
 import com.company.core.entity.Copie;
@@ -20,7 +21,8 @@ public interface BorrowRepository extends JpaRepository<Borrow, Long>{
 	// identification d'un emprunt par son id
 	public Optional<Borrow> findById(Long id);
 	
-	
+	@Query("from Borrow")
+	public List<Borrow> findAllBorrow();
 	
 	
 	

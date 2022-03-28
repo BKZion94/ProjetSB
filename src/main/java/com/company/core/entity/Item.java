@@ -35,7 +35,7 @@ public class Item {
 	@JsonView(ItemsViews.Detail.class)
 	private Long id;
 	
-	//@Temporal(TemporalType.DATE)
+	@Temporal(TemporalType.DATE)
 	@JsonView(ItemsViews.Detail.class)
 	private Date integration;
 	

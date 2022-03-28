@@ -35,7 +35,7 @@ public class UserService {
 	
 	// Lecture d'un User 
 	
-	public User getItem(Long id) {
+	public User getUserId(Long id) {
 		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No such User"));}
 
 	

@@ -1,7 +1,6 @@
 package com.company.core.entity;
 
 
-import java.beans.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -40,6 +41,7 @@ public class User {
 	
 	
 	@OneToMany(fetch=FetchType.LAZY,cascade= {CascadeType.REMOVE}, orphanRemoval=true, mappedBy = "borrower")
+	@JsonIgnore
 	private List<Borrow> borrowedItems = new ArrayList<>();
 
 	

@@ -2,8 +2,6 @@ package com.company.core.entity;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -16,9 +14,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Data;
 
@@ -44,8 +42,8 @@ public class Borrow {
 	@JoinColumn(name="USERS_ID")
 	private User borrower;
 	
-	
-	@OneToMany (mappedBy="borrow", cascade= CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+	@JsonIgnore
+	@OneToMany (mappedBy="borrow", cascade= CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	private List<Copie> copie =new ArrayList<>();
 	
 }
