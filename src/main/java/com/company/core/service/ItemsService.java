@@ -73,10 +73,7 @@ public class ItemsService {
 		return itemRepository.save(cd);
 	}
 	
-	public Cd findByArtist(String artist) {
-		return itemRepository.findByArtistContainsIgnoreCase(artist).orElseThrow(() -> new EntityNotFoundException("No such Cd in the catalogue"));}
 
-	
 	// Pour les Dvds
 	
 	public List<Dvd> getAllDvds(){

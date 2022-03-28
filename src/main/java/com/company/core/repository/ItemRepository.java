@@ -21,9 +21,7 @@ public interface ItemRepository extends JpaRepository<Item, Long>{
 	@Query("from Cd")
 	public List<Cd> findAllCd();
 		//** Get Cd by the artist name
-	public Optional<Cd> findByArtistContainsIgnoreCase(String artist);
 
-	
 	
 
 	
