@@ -17,23 +17,23 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
-	// Lecture de la liste des Users
+
 	public List<User> findAllUsers() throws LazyInitializationException{
 		return userRepository.findAll();
 	}
 	
-	// Creation d'un User
+
 	public void addUsers(User user) {
 		userRepository.save(user);
 	}
 	
-	// Update le User
+
 	
 	public void updateUser (Long id, User user) {
 		userRepository.save(user);
 	}
 	
-	// Lecture d'un User 
+
 	
 	public User getUserId(Long id) {
 		return userRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("No such User"));}

@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.company.core.controller.ItemNotFoundException;
 import com.company.core.entity.Borrow;
 import com.company.core.entity.Copie;
 import com.company.core.entity.Item;
@@ -30,11 +31,9 @@ public class BorrowServiceTest {
 	@Test
 	public void WhenUserTestMakeABorrowCheckIfHeCan() throws AvailableCopieException, QuotasExceedException {
 		
-		// Creation d'un borrower
 		User borrower = new User();
 		borrower.setId(1l);
 		
-		//Creation list Item emrounté
 		List<Item> items = new ArrayList<>();
 		Item item2 = new Item();
 		item2.setId(2l);
@@ -52,8 +51,8 @@ public class BorrowServiceTest {
 	}
 	
 	@Test
-	public void CheckIfTheListOfCopiesBorrowedAreEmpty() throws AvailableCopieException, QuotasExceedException, DepassementException {
-		// Ce test indique si une copie est réelement rendu lors d'un retour d'emprunt
+	public void CheckIfTheListOfCopiesBorrowedAreEmpty() throws AvailableCopieException, QuotasExceedException, DepassementException, ItemNotFoundException {
+
 		Borrow borrow = new Borrow();
 		borrow.setId(1L);
 		borrow.setEndDate(LocalDateTime.of(2022, 03, 26, 20, 20));
@@ -77,8 +76,8 @@ public class BorrowServiceTest {
 		Borrow borrow1=borrowService.returnABorrow(borrow);
 		
 		assertEquals(0,borrow1.getCopie().size()); 
-													// OK les copies liées à un borrow sont inexistants
-		assertThat(differenceInDays).isLessThan(8); // Non dépassement du quota de prêt
+													
+		assertThat(differenceInDays).isLessThan(8); 
 	}
 
 	

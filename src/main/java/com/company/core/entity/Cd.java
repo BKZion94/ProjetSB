@@ -1,6 +1,5 @@
 package com.company.core.entity;
 
-import java.time.Duration;
 import java.util.Date;
 
 
@@ -10,9 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import lombok.Data;
 
-@Data
 @Entity
 @Table
 
@@ -34,6 +31,46 @@ public class Cd extends Item{
 	
 	@NotNull
 	private int nbTitle;
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public Date getReleaseDate() {
+		return releaseDate;
+	}
+
+	public void setReleaseDate(Date releaseDate) {
+		this.releaseDate = releaseDate;
+	}
+
+	public String getArtist() {
+		return artist;
+	}
+
+	public void setArtist(String artist) {
+		this.artist = artist;
+	}
+
+	public int getDuration() {
+		return duration;
+	}
+
+	public void setDuration(int duration) {
+		this.duration = duration;
+	}
+
+	public int getNbTitle() {
+		return nbTitle;
+	}
+
+	public void setNbTitle(int nbTitle) {
+		this.nbTitle = nbTitle;
+	}
 
 	
 		

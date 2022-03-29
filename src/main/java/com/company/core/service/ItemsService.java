@@ -1,25 +1,23 @@
 package com.company.core.service;
 
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.Optional;
-
 import javax.persistence.EntityNotFoundException;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.company.core.entity.Book;
 import com.company.core.entity.Cd;
 import com.company.core.entity.Dvd;
 import com.company.core.entity.Item;
 import com.company.core.repository.ItemRepository;
+
+
 @Service
 public class ItemsService {
 	@ Autowired
 	ItemRepository itemRepository;
 	
-	// Pour tous les items
+	
 	public List<Item> getAllItems(){
 		return 	itemRepository.findAll();
 	}
@@ -43,9 +41,6 @@ public class ItemsService {
 		itemRepository.deleteById(id);
 	}
 	
-	
-	// Pour les CDs 
-	
 
 	public List<Item> getAllCds(){
 
@@ -64,9 +59,7 @@ public class ItemsService {
 	public Item updateCd (Long id, Cd cd) {
 		return itemRepository.save(cd);
 	}
-	
 
-	// Pour les Dvds
 	
 	public List<Item> getAllDvds(){
 		return itemRepository.findAllDvd();
@@ -87,8 +80,6 @@ public class ItemsService {
 	}
 
 
-	
-	// Pour les books
 	
 	public List<Item> getAllBooks(){
 		

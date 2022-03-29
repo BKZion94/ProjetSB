@@ -11,15 +11,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.company.core.entity.Borrow;
 import com.company.core.entity.Item;
 import com.company.core.entity.User;
-import com.company.core.repository.UserRepository;
 import com.company.core.service.AvailableCopieException;
 import com.company.core.service.BorrowService;
 import com.company.core.service.DepassementException;
-import com.company.core.service.ItemsService;
+
 import com.company.core.service.QuotasExceedException;
 
 @RestController
@@ -27,10 +25,8 @@ public class BorrowRestController {
 	
 	@Autowired
 	private BorrowService borrowService;
-	@Autowired
-	private UserRepository userRepository;
-	@Autowired
-	private ItemsService itemService;
+
+
 	
 	public BorrowRestController(BorrowService borrowService) {
 		this.borrowService=borrowService;
@@ -48,11 +44,11 @@ public class BorrowRestController {
 		User borrower = new User();
 		borrower.setId(id);
 		
-		return new ResponseEntity(borrowService.makeABorrow(borrower, items), HttpStatus.CREATED);
+		return new ResponseEntity<Borrow>(borrowService.makeABorrow(borrower, items), HttpStatus.CREATED);
 	}
 
 	@DeleteMapping("/borrow/{id}")
-	public Borrow RestituteAEmprunt(@PathVariable Long id) throws DepassementException {
+	public Borrow RestituteAEmprunt(@PathVariable Long id) throws DepassementException, ItemNotFoundException {
 		Borrow borrow = new Borrow();
 		borrow.setId(id);
 		
