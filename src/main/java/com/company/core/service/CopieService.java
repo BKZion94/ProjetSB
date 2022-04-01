@@ -17,7 +17,6 @@ public class CopieService {
 
 	@Autowired
 	CopieRepository copieRepository;
-	
 
 	public List<Copie> findById(Long id){
 		Item item=new Item();

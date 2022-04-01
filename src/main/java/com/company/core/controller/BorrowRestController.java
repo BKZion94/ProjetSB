@@ -1,7 +1,6 @@
 package com.company.core.controller;
 
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +16,7 @@ import com.company.core.entity.User;
 import com.company.core.service.AvailableCopieException;
 import com.company.core.service.BorrowService;
 import com.company.core.service.DepassementException;
-
+import com.company.core.service.ItemNotFoundException;
 import com.company.core.service.QuotasExceedException;
 
 @RestController
@@ -25,7 +24,6 @@ public class BorrowRestController {
 	
 	@Autowired
 	private BorrowService borrowService;
-
 
 	
 	public BorrowRestController(BorrowService borrowService) {
@@ -39,6 +37,7 @@ public class BorrowRestController {
 		return borrowService.findAllBorrow();
 	}
 	
+	
 	@PostMapping("/borrow/{id}")
 	public ResponseEntity<Borrow> createAEmprunt(@PathVariable Long id, @RequestBody List<Item> items) throws AvailableCopieException, QuotasExceedException {
 		User borrower = new User();
@@ -47,6 +46,7 @@ public class BorrowRestController {
 		return new ResponseEntity<Borrow>(borrowService.makeABorrow(borrower, items), HttpStatus.CREATED);
 	}
 
+	
 	@DeleteMapping("/borrow/{id}")
 	public Borrow RestituteAEmprunt(@PathVariable Long id) throws DepassementException, ItemNotFoundException {
 		Borrow borrow = new Borrow();
@@ -54,7 +54,5 @@ public class BorrowRestController {
 		
 		return borrowService.returnABorrow(borrow);
 	}
-	
-	
 	
 }

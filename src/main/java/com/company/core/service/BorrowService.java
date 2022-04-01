@@ -5,14 +5,10 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
 import javax.persistence.EntityNotFoundException;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import com.company.core.controller.ItemNotFoundException;
 import com.company.core.entity.Borrow;
 import com.company.core.entity.Copie;
 import com.company.core.entity.Item;
@@ -43,7 +39,7 @@ public class BorrowService {
 		int emprunt = borrower.getBorrowedItems().size();
 
 		if (emprunt + items.size() > 3) {
-			throw new QuotasExceedException();
+			throw new QuotasExceedException("User have already 3 items borrowed");
 		}
 
 		List<Copie> copiefound = new ArrayList<>();
@@ -52,7 +48,7 @@ public class BorrowService {
 			List<Copie> copieDispo = copieRepository.copiedispo(item); 
 
 			if (copieDispo.size() == 0) {
-				throw new AvailableCopieException(); 
+				throw new AvailableCopieException("No such copie: "); 
 
 			} else {
 				copiefound.add(copieDispo.get(0));
@@ -61,7 +57,7 @@ public class BorrowService {
 		}
 
 		Borrow reservation=new Borrow();
-		reservation.setCopie(copiefound);
+		reservation.setCopies(copiefound);
 		reservation.setBorrower(borrower);
 		reservation.setStartDate(LocalDateTime.now());
 		reservation.setEndDate(LocalDateTime.now().plusDays(7));
@@ -74,9 +70,9 @@ public class BorrowService {
 
 	public Borrow returnABorrow(Borrow borrow) throws DepassementException, ItemNotFoundException{
 
-		borrow=borrowRepository.findById(borrow.getId()).orElseThrow(() -> new ItemNotFoundException("No such borrow")); 
+		borrow=borrowRepository.findById(borrow.getId()).orElseThrow(() -> new ItemNotFoundException("No such item")); 
 
-		List<Copie> copis = borrow.getCopie();
+		List<Copie> copis = borrow.getCopies();
 
 		for (Iterator<Copie> iterator = copis.iterator(); iterator.hasNext();) {
 			Copie copie = iterator.next();
@@ -91,7 +87,7 @@ public class BorrowService {
 		long differenceInDays = ChronoUnit.DAYS.between(startDate,endDate);
 		
 		if (differenceInDays>7) {
-			throw new DepassementException();
+			throw new DepassementException("User returned the item late");
 		}
 		
 		
@@ -99,17 +95,9 @@ public class BorrowService {
 	}
 
 	
-	
 	public List<Borrow> findAllBorrow(){
 		return borrowRepository.findAll();
 	}
-	
-	
-
-	
-	
-	
-	
-	
+		
 }
 

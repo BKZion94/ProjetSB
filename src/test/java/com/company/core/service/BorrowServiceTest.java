@@ -13,7 +13,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.company.core.controller.ItemNotFoundException;
 import com.company.core.entity.Borrow;
 import com.company.core.entity.Copie;
 import com.company.core.entity.Item;
@@ -46,7 +45,7 @@ public class BorrowServiceTest {
 		Borrow borrow=borrowService.makeABorrow(borrower, items);
 		
 		assertNotNull(borrow.getId());
-		assertEquals(2,borrow.getCopie().size());
+		assertEquals(2,borrow.getCopies().size());
 		
 	}
 	
@@ -71,11 +70,11 @@ public class BorrowServiceTest {
 		copieList.add(copie);
 		
 		
-		borrow.setCopie(copieList);
+		borrow.setCopies(copieList);
 		
 		Borrow borrow1=borrowService.returnABorrow(borrow);
 		
-		assertEquals(0,borrow1.getCopie().size()); 
+		assertEquals(0,borrow1.getCopies().size()); 
 													
 		assertThat(differenceInDays).isLessThan(8); 
 	}

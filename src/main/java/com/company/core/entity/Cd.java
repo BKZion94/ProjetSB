@@ -3,9 +3,7 @@ package com.company.core.entity;
 import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
 import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 
@@ -13,20 +11,20 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Table
 
 public class Cd extends Item{
-	
+
 	@NotNull
 	private String title;
-	
+
 	@NotNull
 	@JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "yyyy-MM-dd")
 	private LocalDate releaseDate;
-	
+
 	@NotNull
 	private String artist;
-	
+
 	@NotNull
 	private int duration;
-	
+
 	@NotNull
 	private int nbTitle;
 
@@ -70,9 +68,7 @@ public class Cd extends Item{
 		this.nbTitle = nbTitle;
 	}
 
-	
-		
-	}
-	
-	
+}
+
+
 

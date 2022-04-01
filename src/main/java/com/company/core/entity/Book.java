@@ -1,21 +1,13 @@
 package com.company.core.entity;
 
 import java.time.LocalDate;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
-import com.company.core.controller.views.ItemsViews;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonView;
-
-
-
 
 @Entity
 @Table
-
 public class Book extends Item{
 
 	@NotNull	
@@ -25,11 +17,9 @@ public class Book extends Item{
 	@NotNull	
 	private LocalDate releaseDate;
 	
-	@JsonView(ItemsViews.Detail.class)
 	@NotNull
 	private String author;
 	
-	@JsonView(ItemsViews.Detail.class)
 	@NotNull
 	private String nbIsbn;
 
@@ -41,10 +31,4 @@ public class Book extends Item{
 		this.title = title;
 	}
 
-	
-
-	
-	
-	
-	
 }

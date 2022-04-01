@@ -10,5 +10,7 @@ public class QuotasExceedException extends Exception {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+	public QuotasExceedException(String criteria) {
+		super("User have already 3 items borrowed: "+ criteria);
+	}
 }

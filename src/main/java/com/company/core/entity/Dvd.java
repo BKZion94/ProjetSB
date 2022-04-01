@@ -6,7 +6,6 @@ import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
@@ -38,9 +37,7 @@ public class Dvd extends Item{
 
 	public void setTitle(String title) {
 		this.title = title;
-	}
-
-	
+	}	
 
 	public LocalDate getReleaseDate() {
 		return releaseDate;
@@ -58,8 +55,6 @@ public class Dvd extends Item{
 		this.director = director;
 	}
 
-	
-
 	public int getDuration() {
 		return duration;
 	}
@@ -75,6 +70,5 @@ public class Dvd extends Item{
 	public void setType(Type type) {
 		this.type = type;
 	}
-	
-	
+		
 }
