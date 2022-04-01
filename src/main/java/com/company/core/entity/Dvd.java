@@ -1,15 +1,13 @@
 package com.company.core.entity;
 
-import java.time.Duration;
-import java.util.Date;
-
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table
@@ -20,14 +18,15 @@ public class Dvd extends Item{
 	private String title;
 	
 	@NotNull
-	@Temporal(TemporalType.DATE)
-	private Date releaseDate;
+
+	@JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "yyyy-MM-dd")
+	private LocalDate releaseDate;
 	
 	@NotNull
 	private String director;
 	
 	@NotNull
-	private Duration duration;
+	private int duration;
 	
 	@NotNull
 	@Enumerated(EnumType.STRING)
@@ -41,11 +40,13 @@ public class Dvd extends Item{
 		this.title = title;
 	}
 
-	public Date getReleaseDate() {
+	
+
+	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 
@@ -57,11 +58,13 @@ public class Dvd extends Item{
 		this.director = director;
 	}
 
-	public Duration getDuration() {
+	
+
+	public int getDuration() {
 		return duration;
 	}
 
-	public void setDuration(Duration duration) {
+	public void setDuration(int duration) {
 		this.duration = duration;
 	}
 

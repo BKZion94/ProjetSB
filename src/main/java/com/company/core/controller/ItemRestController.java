@@ -53,4 +53,10 @@ public class ItemRestController {
 
 	}
 
+	@GetMapping("/new")
+	public List<Item> whatsnew(){
+		return itemService.whatsNew();
+	}
+	
+	
 }

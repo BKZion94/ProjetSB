@@ -1,13 +1,12 @@
 package com.company.core.entity;
 
-import java.util.Date;
-
-
+import java.time.LocalDate;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+
 import javax.validation.constraints.NotNull;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 
 @Entity
@@ -19,9 +18,8 @@ public class Cd extends Item{
 	private String title;
 	
 	@NotNull
-	@Temporal(TemporalType.DATE)
-
-	private Date releaseDate;
+	@JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "yyyy-MM-dd")
+	private LocalDate releaseDate;
 	
 	@NotNull
 	private String artist;
@@ -40,11 +38,11 @@ public class Cd extends Item{
 		this.title = title;
 	}
 
-	public Date getReleaseDate() {
+	public LocalDate getReleaseDate() {
 		return releaseDate;
 	}
 
-	public void setReleaseDate(Date releaseDate) {
+	public void setReleaseDate(LocalDate releaseDate) {
 		this.releaseDate = releaseDate;
 	}
 

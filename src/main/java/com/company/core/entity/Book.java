@@ -1,15 +1,13 @@
 package com.company.core.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
-
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import com.company.core.controller.views.ItemsViews;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonView;
 
 
@@ -23,10 +21,9 @@ public class Book extends Item{
 	@NotNull	
 	private String title;
 	
-	@JsonView(ItemsViews.Detail.class)
+	@JsonFormat(shape = JsonFormat.Shape.NUMBER, pattern = "yyyy-MM-dd")
 	@NotNull	
-	@Temporal(TemporalType.DATE)
-	private Date releaseDate;
+	private LocalDate releaseDate;
 	
 	@JsonView(ItemsViews.Detail.class)
 	@NotNull

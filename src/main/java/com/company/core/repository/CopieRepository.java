@@ -22,6 +22,6 @@ public interface CopieRepository extends JpaRepository<Copie, Long> {
 	
 	@Query("select c from Copie c WHERE c.item = :item AND c.id IN (select c2.id from Copie c2 where c2.borrow is not null)")
 	public List<Copie> copieNondispo(Item item);
-
+	
 	
 }

@@ -1,10 +1,15 @@
 package com.company.core.service;
 
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.company.core.entity.Book;
 import com.company.core.entity.Cd;
 import com.company.core.entity.Dvd;
@@ -101,7 +106,21 @@ public class ItemsService {
 	}
 	
 
-	
+	public List<Item> whatsNew (){
+		
+		List<Item> items = itemRepository.findAll();
+
+		List<Item> news = new ArrayList<>();
+
+		LocalDate date = LocalDate.now();
+		for (Item item :items) {
+			if (item.getIntegration().isAfter(date.minusDays(40))==true) {
+				news.add(item);
+			}
+		}
+		
+	return news;	
+	}
 	
 	
 }
